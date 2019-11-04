@@ -398,7 +398,7 @@
 <h3 id="行等价"><a href="#行等价" class="headerlink" title="行等价"></a>行等价</h3><p>若存在一个有限初等矩阵序列$E_1, E_2, E_3, …, E_k$， 使得 $B = E_kE_{k-1}…E_1A$，则称A和B是行等价的。</p>
 <h3 id="非奇异矩阵的等价条件"><a href="#非奇异矩阵的等价条件" class="headerlink" title="非奇异矩阵的等价条件"></a>非奇异矩阵的等价条件</h3><ol>
 <li>$A$是非奇异的</li>
-<li>$Ax=0$仅有平凡解$0$</li>
+<li>$Ax=0$仅有平凡解$0$，即$N(A)=0$</li>
 <li>$A$与$I$行等价</li>
 </ol>
 <h3 id="矩阵求逆"><a href="#矩阵求逆" class="headerlink" title="矩阵求逆"></a>矩阵求逆</h3><p>将矩阵A与单位矩阵构成增广矩阵，然后用高斯消元法将A化成单位矩阵，右侧的结果便是$A^{-1}$</p>
@@ -759,7 +759,14 @@ $$<br>c_k = \frac{1}{2}(a_k -ib_k) \\<br>= \frac{1}{2\pi}\int_{-\pi}^{\pi}f(x)(\
 <li>令w为一复标量，则$\overline{w} = w^H$</li>
 <li>令w为一复标量，$u$为一复向量，则$wu^H = u^Hw^H = \overline{w}u^H$</li>
 </ol>
-<h3 id="正定矩阵"><a href="#正定矩阵" class="headerlink" title="正定矩阵"></a>正定矩阵</h3><h4 id="定义-1"><a href="#定义-1" class="headerlink" title="定义"></a>定义</h4><p>若对$R^n$中所有非零向量$x$，实对称矩阵A满足$x^TAx \gt 0$，则称矩阵$A$是正定的。</p>
+<h3 id="奇异值分解"><a href="#奇异值分解" class="headerlink" title="奇异值分解"></a>奇异值分解</h3><h4 id="定义-1"><a href="#定义-1" class="headerlink" title="定义"></a>定义</h4><p>将矩阵$A$ 因式分解成$U\Sigma V^T$称为奇异值分解，其中$U$为$m\times m$的正交矩阵，V为$n\times n$的正交矩阵，$\Sigma$是$m\times n$的矩阵，其形式如下：<br>$$<br>\Sigma = \begin{bmatrix} \Sigma_1 &amp; 0 \\ 0 &amp; 0 \end{bmatrix} \\<br>$$<br>其中$\Sigma_1$是对角矩阵，其对角元素为矩阵$A^TA$的非零特征值按从大到小排序之后，开方，即$\sigma _i = \sqrt{\lambda_i}$</p>
+<blockquote>
+<p>若A的秩为$\gamma$，则矩阵$A^TA$的秩也为$\gamma$？证明之</p>
+</blockquote>
+<h4 id="求解方法-1"><a href="#求解方法-1" class="headerlink" title="求解方法"></a>求解方法</h4><p>首先，计算矩阵$A^TA$的特征值，进而求出奇异值，构造$\Sigma$（按照奇异值从大到小的顺序排列）；</p>
+<p>然后对应于每一个特征值，求解$A^TA$的特征向量，构造$V = (v_1, v_2, \cdots, v_n)$；</p>
+<p>对于矩阵$U$，其前n个列向量（若$m \gt n$）可以根据公式$u_i = \frac{1}{\sigma_i}Av_i$求解。</p>
+<h3 id="正定矩阵"><a href="#正定矩阵" class="headerlink" title="正定矩阵"></a>正定矩阵</h3><h4 id="定义-2"><a href="#定义-2" class="headerlink" title="定义"></a>定义</h4><p>若对$R^n$中所有非零向量$x$，实对称矩阵A满足$x^TAx \gt 0$，则称矩阵$A$是正定的。</p>
 <p>对称矩阵A满足正定矩阵的充要条件是矩阵A的所有特征值均为正的。</p>
 <blockquote>
 <p>证明：首先，令$\lambda_1$为矩阵A的特征值，对应的特征向量为$x_1$，则有$Ax_1 = \lambda x_1$。又因为对于所有非零向量都满足$x^TAx \gt 0$， 所以$x_1^TAx_1 = x_1^T\lambda_1 x_1 = \lambda_1 ||x_1||^2 \gt 0$，因此有$\lambda_1 \gt 0$；反之，若对称矩阵所有的特征值都大于0，令特征向量$x_1, \cdots, x_n$构成$R^n$中的一组规范正交基，则任意向量可表示为$x = c_1x_1 + \cdots + c_nx_n, x^TAx = x^T(\lambda_1c_1x_1 + \cdots + \lambda_nc_nx_n)$，故有$x^TAx = \lambda_1c_1^2 + \cdots + \lambda_nc_n^2$，因为特征值都大于0，故$x^TAx$也大于0</p>
